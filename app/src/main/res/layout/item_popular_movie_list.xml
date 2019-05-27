@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable name="data"
+                  type="com.bd.popularmovies.model.data.PopularMovieModel"/>
+
+    </data>
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,6 +35,7 @@
                         android:id="@+id/image"
                         android:layout_width="140dp"
                         android:layout_height="200dp"
+                        android:loadPathUrl="@{data.poster_path}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -55,6 +61,7 @@
                         android:layout_marginStart="8dp"
                         android:textSize="15sp"
                         android:textStyle="bold"
+                        android:loadPathUrl="@{data.title}"
                         android:textColor="@color/black"
                         tools:text="John Wick: Chapter 3 – Parabellum"
                         app:layout_constraintEnd_toEndOf="@+id/rate_view"
@@ -67,6 +74,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
+                        android:loadPathUrl="@{data.release_date}"
                         app:layout_constraintTop_toBottomOf="@+id/title"
                         app:layout_constraintEnd_toEndOf="@+id/rate_view"
                         app:layout_constraintStart_toStartOf="@+id/title"
@@ -81,6 +89,7 @@
                         android:layout_margin="8dp"
                         android:textSize="13sp"
                         android:maxLines="6"
+                        android:loadPathUrl="@{data.overview}"
                         android:ellipsize="end"
                         tools:text="John Wick iki nedenden ötürü firaridir. Kellesi üzerine 14 milyon dolarlık açık sözleşme konulmuştur ve temel bir kuralı ihlal etmiştir; Continental Hotel'de birini öldürmüştür. Kurbanı ise açık kontratı sunan Yüksek Masa üyesidir. İşi bitmiş olması gereken John'a otelin yöneticisi Winston tarafından bir saatlik bir kaçış süresi verilir. Ardından üyeliği iptal edilecek, tüm hizmetlerden men edilecek ve diğer üyelerle iletişimi kesilecektir. John'un New York City'den kaçma mücadelesinde güvenebileceği tek şey servis endüstrisidir..."
                         app:layout_constraintTop_toBottomOf="@+id/date"
