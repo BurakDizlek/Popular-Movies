@@ -13,7 +13,7 @@ import java.net.CookieManager
 import java.net.CookiePolicy
 import java.util.concurrent.TimeUnit
 
-class ApiClient {
+object ApiClient {
     private var TIMEOUTOFSECOND = 16
     val instance: WebService by lazy {
         setupHttpClient()
