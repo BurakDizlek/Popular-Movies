@@ -10,26 +10,24 @@
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="216dp">
 
 
         <android.support.v7.widget.CardView
                 android:id="@+id/card_view"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="8dp"
+                app:cardElevation="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardElevation="8dp"
-                android:layout_marginEnd="8dp">
+                app:layout_constraintBottom_toBottomOf="parent">
 
 
             <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
 
                 <ImageView
                         android:id="@+id/image"
@@ -40,13 +38,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <ImageView
-                        android:id="@+id/rate_view"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@color/black"
-                        android:layout_margin="8dp"
-                        android:visibility="gone"
+                <TextView
+                        android:id="@+id/average_view"
+                        android:layout_width="56dp"
+                        android:layout_height="36dp"
+                        android:average="@{data.vote_average}"
+                        android:textColor="@color/white"
+                        tools:text="7.1"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -56,26 +57,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:text="@{data.title}"
                         android:textColor="@color/black"
                         tools:text="John Wick: Chapter 3 – Parabellum"
-                        app:layout_constraintEnd_toEndOf="@+id/rate_view"
                         app:layout_constraintStart_toEndOf="@+id/image"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/average_view"/>
 
-
-                <TextView
-                        android:id="@+id/date"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="@{data.release_date}"
-                        app:layout_constraintTop_toBottomOf="@+id/title"
-                        app:layout_constraintEnd_toEndOf="@+id/rate_view"
-                        app:layout_constraintStart_toStartOf="@+id/title"
-                        tools:text="mayıs 15, 2019"/>
 
 
                 <TextView
@@ -87,9 +78,10 @@
                         android:textSize="13sp"
                         android:maxLines="6"
                         android:text="@{data.overview}"
+                        android:emptyOverview="@{data.overview}"
                         android:ellipsize="end"
                         tools:text="John Wick iki nedenden ötürü firaridir. Kellesi üzerine 14 milyon dolarlık açık sözleşme konulmuştur ve temel bir kuralı ihlal etmiştir; Continental Hotel'de birini öldürmüştür. Kurbanı ise açık kontratı sunan Yüksek Masa üyesidir. İşi bitmiş olması gereken John'a otelin yöneticisi Winston tarafından bir saatlik bir kaçış süresi verilir. Ardından üyeliği iptal edilecek, tüm hizmetlerden men edilecek ve diğer üyelerle iletişimi kesilecektir. John'un New York City'den kaçma mücadelesinde güvenebileceği tek şey servis endüstrisidir..."
-                        app:layout_constraintTop_toBottomOf="@+id/date"
+                        app:layout_constraintTop_toBottomOf="@+id/title"
                         app:layout_constraintStart_toEndOf="@+id/image"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
