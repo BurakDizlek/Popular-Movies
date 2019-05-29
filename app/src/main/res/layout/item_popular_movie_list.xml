@@ -15,6 +15,8 @@
 
         <android.support.v7.widget.CardView
                 android:id="@+id/card_view"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
@@ -66,7 +68,6 @@
                         app:layout_constraintStart_toEndOf="@+id/image"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toStartOf="@+id/average_view"/>
-
 
 
                 <TextView

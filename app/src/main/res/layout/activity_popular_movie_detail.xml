@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="data"
+                  type="com.bd.popularmovies.model.response.GetPopularMovieDetailResponse"/>
+        
+        <variable name="loading" type="Boolean"/>
+        <import type="android.view.View"/>
+    </data>
+
+
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/movie_photo"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:background="@color/black"
+                android:alpha="0.3"
+                android:loadPathUrl="@{data.poster_path}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <ImageView
+                android:id="@+id/current_movie_photo"
+                android:layout_width="160dp"
+                android:layout_height="240dp"
+                android:loadPathUrl="@{data.poster_path}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_photo"
+                app:layout_constraintEnd_toEndOf="@+id/movie_photo" android:layout_marginEnd="8dp"/>
+
+        <TextView
+                android:id="@+id/average_view"
+                android:layout_width="56dp"
+                android:layout_height="36dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:average="@{data.vote_average}"
+                android:layout_margin="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintBottom_toBottomOf="@+id/title"/>
+
+        <TextView android:id="@+id/title"
+                  android:layout_width="wrap_content"
+                  android:textColor="@color/black"
+                  android:textSize="18sp"
+                  android:maxWidth="240dp"
+                  android:minHeight="52dp"
+                  android:layout_height="wrap_content"
+                  tool:text="Aladdin"
+                  android:gravity="center"
+                  android:text="@{data.title}"
+                  android:textStyle="bold"
+                  android:layout_marginTop="8dp"
+                  app:layout_constraintTop_toBottomOf="@+id/movie_photo"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:layout_marginStart="8dp"
+        />
+
+        <TextView android:id="@+id/release_year"
+                  android:layout_width="wrap_content"
+                  android:textSize="18sp"
+                  android:layout_height="wrap_content"
+                  tool:text="(2019)"
+                  android:yearFromDate="@{data.release_date}"
+                  android:textStyle="bold"
+                  android:gravity="center"
+                  app:layout_constraintStart_toEndOf="@+id/title"
+                  android:layout_marginStart="8dp"
+                  app:layout_constraintHorizontal_bias="0"
+                  android:layout_marginEnd="8dp"
+                  app:layout_constraintEnd_toStartOf="@+id/average_view"
+                  app:layout_constraintTop_toTopOf="@+id/title" app:layout_constraintBottom_toBottomOf="@+id/title"/>
+
+        <TextView android:id="@+id/line"
+                  android:layout_width="0dp"
+                  android:layout_height="1dp"
+                  android:layout_margin="8dp"
+                  android:background="@color/line_grey"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+        <TextView android:id="@+id/label_overview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/label_overview"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/black"
+                  android:layout_margin="8dp"
+                  app:layout_constraintTop_toBottomOf="@+id/line"
+                  app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+                android:id="@+id/overview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@{data.overview}"
+                android:emptyOverview="@{data.overview}"
+                android:layout_margin="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_overview"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="64dp"
+                android:visibility="@{loading ? View.VISIBLE : View.GONE}"
+                android:layout_height="64dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import com.bd.popularmovies.R
 import com.bd.popularmovies.databinding.ItemPopularMovieListBinding
 import com.bd.popularmovies.model.data.PopularMovieModel
+import com.bd.popularmovies.ui.listener.ItemClickListener
 
 
-class PopularMovieListAdapter : PagedListAdapter<PopularMovieModel, PopularMovieListAdapter.ViewHolder>(diffUtilCallBack) {
+class PopularMovieListAdapter(private val clickListener: ItemClickListener) :
+    PagedListAdapter<PopularMovieModel, PopularMovieListAdapter.ViewHolder>(diffUtilCallBack) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +23,10 @@ class PopularMovieListAdapter : PagedListAdapter<PopularMovieModel, PopularMovie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
-        holder.binding?.data = movie  // datayı bind ettik ve herkes mutlu.
+        holder.binding?.data = movie
+        holder.binding?.cardView?.setOnClickListener {
+            clickListener.onItemClick(it, position)
+        }
     }
 
 

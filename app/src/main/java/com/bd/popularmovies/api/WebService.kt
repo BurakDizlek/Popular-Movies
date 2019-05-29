@@ -1,6 +1,6 @@
 package com.bd.popularmovies.api
 
-import com.bd.popularmovies.model.response.GetMovieDetailResponse
+import com.bd.popularmovies.model.response.GetPopularMovieDetailResponse
 import com.bd.popularmovies.model.response.GetPopularMoviesResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -22,9 +22,9 @@ interface WebService {
 
     @GET("{movie_id}")
     fun getMovieDetail(
-        @Path("movie_id") movieID: Int,
+        @Path("movie_id") movieID: Long,
         @Query("api_key") apiKey: String,
         @Query("language") language: String
-    ): Call<GetMovieDetailResponse>
+    ): Call<GetPopularMovieDetailResponse>
 
 }

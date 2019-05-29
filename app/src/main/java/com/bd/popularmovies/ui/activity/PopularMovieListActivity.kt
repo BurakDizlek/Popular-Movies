@@ -7,24 +7,26 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.widget.Toast
 import com.bd.popularmovies.R
 import com.bd.popularmovies.databinding.ActivityPopularMovieListBinding
 import com.bd.popularmovies.model.data.PopularMovieModel
 import com.bd.popularmovies.ui.adapter.PopularMovieListAdapter
+import com.bd.popularmovies.ui.listener.ItemClickListener
 import com.bd.popularmovies.utils.checkConnectivity
 import com.bd.popularmovies.viewmodel.PopularMovieListViewModel
 
-class PopularMovieListActivity : AppCompatActivity() {
+class PopularMovieListActivity : AppCompatActivity(), ItemClickListener {
+
 
     private val TAG = this.javaClass.simpleName
-    private val adapter = PopularMovieListAdapter()
+    private val adapter = PopularMovieListAdapter(this)
     private lateinit var viewmodel: PopularMovieListViewModel
     private lateinit var binding: ActivityPopularMovieListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_popular_movie_list)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_popular_movie_list)
         viewmodel = ViewModelProviders.of(this).get(PopularMovieListViewModel::class.java)
         binding.data = viewmodel
@@ -37,10 +39,16 @@ class PopularMovieListActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
         viewmodel.popularMovieList.observe(this, Observer<PagedList<PopularMovieModel>> { movieList ->
-            viewmodel.loading.value = false
             adapter.submitList(movieList)
         })
 
         binding.recyclerView.adapter = adapter
+    }
+
+    override fun onItemClick(view: View, position: Int) {  // recyclerView tıklamaları
+        val selectedItem = viewmodel.popularMovieList.value?.get(position)
+        selectedItem?.let {
+            PopularMovieDetailActivity.popularMovieDetailActivityCreater(it.id, it.title, this)
+        }
     }
 }

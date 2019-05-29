@@ -4,7 +4,7 @@ data class PopularMovieModel(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
-    val id: Int,
+    val id: Long,
     val original_language: String,
     val original_title: String,
     val overview: String,
