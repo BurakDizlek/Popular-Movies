@@ -7,18 +7,21 @@ import com.bd.popularmovies.Config
 import com.bd.popularmovies.api.ApiClient
 import com.bd.popularmovies.model.data.PopularMovieModel
 import com.bd.popularmovies.model.response.GetPopularMoviesResponse
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class PopularMovieListDataSource(val loading: MutableLiveData<Boolean>) :
-    PageKeyedDataSource<Int, PopularMovieModel>() {
+    PageKeyedDataSource<Int, PopularMovieModel>(), KoinComponent {
 
     private val TAG = this.javaClass.simpleName
+    private val apiClient: ApiClient by inject()
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, PopularMovieModel>) {
         loading.postValue(true)
-        val call = ApiClient.instance.getPopularMovies(1, Config.API_KEY, Config.API_LANGUAGE)
+        val call = apiClient.shared.getPopularMovies(1, Config.API_KEY, Config.API_LANGUAGE)
         call.enqueue(object : Callback<GetPopularMoviesResponse> { //şimdilik sadece başarılı durumu test ediyoruz.
             override fun onResponse(
                 call: Call<GetPopularMoviesResponse>,
@@ -46,7 +49,7 @@ class PopularMovieListDataSource(val loading: MutableLiveData<Boolean>) :
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, PopularMovieModel>) {
         loading.postValue(true)
-        val call = ApiClient.instance.getPopularMovies(params.key, Config.API_KEY, Config.API_LANGUAGE)
+        val call = apiClient.shared.getPopularMovies(params.key, Config.API_KEY, Config.API_LANGUAGE)
         call.enqueue(object : Callback<GetPopularMoviesResponse> { //şimdilik sadece başarılı durumu test ediyoruz.
             override fun onResponse(
                 call: Call<GetPopularMoviesResponse>, response: Response<GetPopularMoviesResponse>

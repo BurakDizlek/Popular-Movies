@@ -13,9 +13,9 @@ import java.net.CookieManager
 import java.net.CookiePolicy
 import java.util.concurrent.TimeUnit
 
-object ApiClient {
-    private var TIMEOUTOFSECOND = 16
-    val instance: WebService by lazy {
+class ApiClient {
+    private val timeOfSecond: Long = 16
+    val shared: WebService by lazy {
         setupHttpClient()
     }
 
@@ -23,12 +23,10 @@ object ApiClient {
         val cookieManager = CookieManager()
         CookieHandler.setDefault(cookieManager)
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
-
-
         val client = clientBuilder()
-            .connectTimeout(TIMEOUTOFSECOND.toLong(), TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUTOFSECOND.toLong(), TimeUnit.SECONDS)
-            .readTimeout(TIMEOUTOFSECOND.toLong(), TimeUnit.SECONDS)
+            .connectTimeout(timeOfSecond, TimeUnit.SECONDS)
+            .writeTimeout(timeOfSecond, TimeUnit.SECONDS)
+            .readTimeout(timeOfSecond, TimeUnit.SECONDS)
             .connectionPool(ConnectionPool())
             .build()
         val gson = GsonBuilder().create()

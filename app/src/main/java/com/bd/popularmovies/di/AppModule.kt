@@ -1,5 +1,6 @@
 package com.bd.popularmovies.di
 
+import com.bd.popularmovies.api.ApiClient
 import com.bd.popularmovies.repository.GetPopularMovieDetailRepository
 import com.bd.popularmovies.viewmodel.PopularMovieDetailViewModel
 import com.bd.popularmovies.viewmodel.PopularMovieListViewModel
@@ -10,5 +11,6 @@ import org.koin.dsl.module
 val appModule: Module = module {
     viewModel { PopularMovieDetailViewModel(get()) }
     viewModel { PopularMovieListViewModel() }
-    single { GetPopularMovieDetailRepository() }
+    single { GetPopularMovieDetailRepository(get()) }
+    single { ApiClient() }
 }

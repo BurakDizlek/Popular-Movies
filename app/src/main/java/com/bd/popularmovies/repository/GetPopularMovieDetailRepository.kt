@@ -9,11 +9,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GetPopularMovieDetailRepository {
+class GetPopularMovieDetailRepository(private val apiClient: ApiClient) {
     private val TAG = this.javaClass.simpleName
 
     fun getMovieDetail(data: MutableLiveData<GetPopularMovieDetailResponse>, movieID: Long) {
-        val call = ApiClient.instance.getMovieDetail(movieID, Config.API_KEY, Config.API_LANGUAGE)
+        val call = apiClient.shared.getMovieDetail(movieID, Config.API_KEY, Config.API_LANGUAGE)
         call.enqueue(object : Callback<GetPopularMovieDetailResponse> {
             override fun onResponse(
                 call: Call<GetPopularMovieDetailResponse>,
