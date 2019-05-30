@@ -9,9 +9,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object GetPopularMovieDetailRepository {
+class GetPopularMovieDetailRepository {
     private val TAG = this.javaClass.simpleName
-    // singleton oluşturulacak. koin...
 
     fun getMovieDetail(data: MutableLiveData<GetPopularMovieDetailResponse>, movieID: Long) {
         val call = ApiClient.instance.getMovieDetail(movieID, Config.API_KEY, Config.API_LANGUAGE)

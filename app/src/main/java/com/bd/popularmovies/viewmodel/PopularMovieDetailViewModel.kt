@@ -4,12 +4,11 @@ import android.arch.lifecycle.MutableLiveData
 import com.bd.popularmovies.model.response.GetPopularMovieDetailResponse
 import com.bd.popularmovies.repository.GetPopularMovieDetailRepository
 
-class PopularMovieDetailViewModel : BaseViewModel() {
+class PopularMovieDetailViewModel(private val repository: GetPopularMovieDetailRepository) : BaseViewModel() {
     val movieDetailData = MutableLiveData<GetPopularMovieDetailResponse>()
 
-
     fun getMovieDetail(movieID: Long) {
-        GetPopularMovieDetailRepository.getMovieDetail(movieDetailData, movieID)
+        repository.getMovieDetail(movieDetailData, movieID)
     }
 
 }
