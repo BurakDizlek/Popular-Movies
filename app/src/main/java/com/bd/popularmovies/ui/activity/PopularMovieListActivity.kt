@@ -24,6 +24,7 @@ class PopularMovieListActivity : AppCompatActivity(), ItemClickListener {
     private val adapter = PopularMovieListAdapter(this)
     private val viewmodel: PopularMovieListViewModel by inject()
     private lateinit var binding: ActivityPopularMovieListBinding
+    private var lastPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,5 +50,16 @@ class PopularMovieListActivity : AppCompatActivity(), ItemClickListener {
         selectedItem?.let {
             PopularMovieDetailActivity.popularMovieDetailActivityCreater(it.id, it.title, this)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        lastPosition = (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (binding.recyclerView.layoutManager as LinearLayoutManager).scrollToPosition(lastPosition)
+        lastPosition = 0
     }
 }
